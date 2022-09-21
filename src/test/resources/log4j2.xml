@@ -11,7 +11,11 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="pages-logger" level="info" additivity="false">
+        <Logger name="system-variables" level="info" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Logger name="authentication" level="debug" additivity="false">
             <AppenderRef ref="LogToFile"/>
             <AppenderRef ref="LogToConsole"/>
         </Logger>
