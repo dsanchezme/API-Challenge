@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeSuite;
 public class BaseController {
 
     private final SystemVariables systemVariables = new SystemVariables();
-    private static final Logger logger = LogManager.getLogger(BaseController.class);
+    private static final Logger logger = LogManager.getLogger("base");
 
     private final String baseURL = "https://api.themoviedb.org/3";
 
@@ -23,16 +23,18 @@ public class BaseController {
 
     protected Response makeGetRequest(String path){
         path = baseURL + path;
+        logger.debug("Get request to " + path);
         return RestAssured.given().contentType(ContentType.JSON)
-                .param("api_key", systemVariables.getApiKey())
+                .queryParam("api_key", systemVariables.getApiKey())
                 .when().get(path)
                 .then().extract().response();
     }
 
     protected Response makePostRequest(String path, String requestBody){
         path = baseURL + path;
+        logger.debug("Post request to " + path + " with body " + requestBody);
         return RestAssured.given().contentType("application/json")
-                .param("api_key", systemVariables.getApiKey())
+                .queryParam("api_key", systemVariables.getApiKey())
                 .body(requestBody)
                 .when().post(path)
                 .then().extract().response();
@@ -40,11 +42,21 @@ public class BaseController {
 
     protected Response makeDeleteRequest(String path, String requestBody){
         path = baseURL + path;
+        logger.debug("Delete request to " + path + " with body " + requestBody);
         return RestAssured.given().contentType("application/json")
-                .param("api_key", systemVariables.getApiKey())
+                .queryParam("api_key", systemVariables.getApiKey())
                 .body(requestBody)
                 .when().delete(path)
                 .then().extract().response();
     }
 
+    public static String getValueFromResponse(Response response, String key){
+        String value = null;
+        try {
+            value = response.jsonPath().get(key);
+        }catch (Exception e){
+            logger.warn("Unable to get " + key + " from response");
+        }
+        return value;
+    }
 }
