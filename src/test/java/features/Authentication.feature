@@ -2,7 +2,6 @@ Feature: Authentication
 
   Scenario: Create Request Token
     Given I want a request token
-    And I have an API key
     When I create the request token
     Then I get successfully the response
     And I get the "request_token" value in the response
@@ -10,7 +9,6 @@ Feature: Authentication
 
   Scenario: Create Session with Login
     Given I want to login to the application
-    And I have an API key
     And I have a request token
     When I create a session with Login
     Then I get successfully the response
@@ -18,7 +16,6 @@ Feature: Authentication
 
   Scenario: Create New session
     Given I want to create a new session
-    And I have an API key
     And I have a request token
     When I create a new session
     Then I get successfully the response

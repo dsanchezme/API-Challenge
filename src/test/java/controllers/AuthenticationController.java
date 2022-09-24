@@ -2,13 +2,14 @@ package controllers;
 
 import helpers.SystemVariables;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AuthenticationController extends BaseController{
 
-    private static Logger logger = LogManager.getLogger("authentication");
-    private SystemVariables systemVariables = new SystemVariables();
+    private final Logger logger = LogManager.getLogger("authentication");
+    private final SystemVariables systemVariables = new SystemVariables();
 
     public Response createRequestToken(){
         String endpoint = "/authentication/token/new";
@@ -25,14 +26,16 @@ public class AuthenticationController extends BaseController{
         String body = "{ \"username\": \"" + systemVariables.getUsername() + "\"," +
                         "\"password\": \"" + systemVariables.getPassword() + "\"," +
                         "\"request_token\": \"" + requestToken + "\" }";
-        return makePostRequest(endpoint,  body);
+        RequestSpecification spec = requestSpecification.body(body);
+        return makePostRequest(endpoint, spec);
     }
 
     public Response createNewSession(String requestToken){
         String endpoint = "/authentication/session/new";
         createSessionWithLogin(requestToken);
         String body = "{ \"request_token\": \"" + requestToken + "\" }";
-        return makePostRequest(endpoint,  body);
+        RequestSpecification spec = requestSpecification.body(body);
+        return makePostRequest(endpoint,  spec);
     }
 
     public String getSessionID(){
@@ -43,7 +46,8 @@ public class AuthenticationController extends BaseController{
     public Response deleteSession(String sessionID){
         String endpoint = "/authentication/session";
         String body = "{ \"session_id\": \"" + sessionID + "\" }";
-        return makeDeleteRequest(endpoint,  body);
+        RequestSpecification spec = requestSpecification.queryParam("session_id", sessionID).body(body);
+        return makeDeleteRequest(endpoint, spec);
     }
 
 }

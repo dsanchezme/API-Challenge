@@ -2,8 +2,10 @@ package controllers;
 
 import helpers.SystemVariables;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeSuite;
@@ -20,43 +22,43 @@ public class BaseController {
         RestAssured.baseURI = "https://api.themoviedb.org/3";
         logger.info("Setting up baseURI");
     }
+    
+    protected RequestSpecification requestSpecification = new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .addQueryParam("api_key", systemVariables.getApiKey())
+                .build();
 
-    protected Response makeGetRequest(String path){
-        path = baseURL + path;
-        logger.debug("Get request to " + path);
-        return RestAssured.given().contentType(ContentType.JSON)
-                .queryParam("api_key", systemVariables.getApiKey())
-                .when().get(path)
+    protected Response makeGetRequest(String endpoint){
+        endpoint = baseURL + endpoint;
+        return RestAssured
+                .given().spec(requestSpecification).body("")
+                .when().get(endpoint)
                 .then().extract().response();
     }
 
-    protected Response makePostRequest(String path, String requestBody){
-        path = baseURL + path;
-        logger.debug("Post request to " + path + " with body " + requestBody);
-        return RestAssured.given().contentType("application/json")
-                .queryParam("api_key", systemVariables.getApiKey())
-                .body(requestBody)
-                .when().post(path)
+    protected Response makePostRequest(String endpoint, RequestSpecification specification){
+        endpoint = baseURL + endpoint;
+        return RestAssured
+                .given().spec(specification)
+                .when().post(endpoint)
                 .then().extract().response();
     }
-
-    protected Response makeDeleteRequest(String path, String requestBody){
-        path = baseURL + path;
-        logger.debug("Delete request to " + path + " with body " + requestBody);
-        return RestAssured.given().contentType("application/json")
-                .queryParam("api_key", systemVariables.getApiKey())
-                .body(requestBody)
-                .when().delete(path)
+    protected Response makeDeleteRequest(String endpoint, RequestSpecification specification){
+        endpoint = baseURL + endpoint;
+        return RestAssured
+                .given().spec(specification)
+                .when().delete(endpoint)
                 .then().extract().response();
     }
 
     public static String getValueFromResponse(Response response, String key){
-        String value = null;
+        Object value = null;
         try {
             value = response.jsonPath().get(key);
         }catch (Exception e){
             logger.warn("Unable to get " + key + " from response");
+            logger.warn(e);
         }
-        return value;
+        return String.valueOf(value);
     }
 }
