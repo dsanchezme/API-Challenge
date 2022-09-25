@@ -1,14 +1,10 @@
 package controllers;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class PeopleController extends BaseController{
@@ -33,6 +29,11 @@ public class PeopleController extends BaseController{
 
     public Response getPersonDetails(String personID){
         String endpoint = "/person/" + personID;
+        return makeGetRequest(endpoint);
+    }
+
+    public Response getAllPersonImages(String personID){
+        String endpoint = "/person/" + personID + "/images";
         return makeGetRequest(endpoint);
     }
 

@@ -16,6 +16,10 @@ import org.testng.Assert;
 import utils.BodyFactory;
 import utils.ScenarioContext;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 public class Lists {
 
     private ScenarioContext context;
@@ -39,7 +43,11 @@ public class Lists {
 
     @When("I create a movie list with the following data")
     public void iCreateAMovieListWithTheFollowingData(DataTable table) {
-        String body = BodyFactory.mapToJson(table.asMap(String.class, String.class));
+        Map<String, String> bodyAsMap = new HashMap<>(table.asMap(String.class, String.class));
+        float randomNumber = new Random().nextFloat();
+        bodyAsMap.put("name", bodyAsMap.get("name") + " " + randomNumber);
+        bodyAsMap.put("description", bodyAsMap.get("description") + " " + randomNumber);
+        String body = BodyFactory.mapToJson(bodyAsMap);
         context.setResponse(listsController.createMovieList(context.getSessionID(), body));
     }
 

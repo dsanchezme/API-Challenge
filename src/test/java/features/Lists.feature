@@ -6,8 +6,8 @@ Feature: Lists
   Scenario: Create list
     Given I want to create a movie list
     When I create a movie list with the following data
-    | name        | My new list |
-    | description | This is the description for my new list   |
+    | name        | My list |
+    | description | This is the description for my list |
     | language    | en            |
     Then I get successfully the response
     And I get the "list_id" value in the response

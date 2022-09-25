@@ -54,5 +54,18 @@ public class People {
     public void thePersonHas(String key) {
         Assert.assertNotNull(BaseController.getValueFromResponse(context.getResponse(), key));
     }
+
+    @When("I get the images of that person")
+    public void iGetTheImagesOfThatPerson() {
+        context.setResponse(peopleController.getAllPersonImages(this.personID));
+    }
+
+    @And("the person ID in the response is the same as the one requested")
+    public void thePersonIDInTheResponseIsTheSameAsTheOneRequested() {
+        String responsePersonID = BaseController.getValueFromResponse(context.getResponse(), "id");
+        Assert.assertNotNull(responsePersonID);
+        Assert.assertEquals(responsePersonID, this.personID);
+    }
+
 }
 

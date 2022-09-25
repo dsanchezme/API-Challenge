@@ -13,3 +13,9 @@ Feature: People
     And the person has "id"
     And the person has "name"
     And the person has "birthday"
+
+  Scenario: Get person images
+    Given I have a person ID
+    When I get the images of that person
+    Then I get status code <200>
+    And the person ID in the response is the same as the one requested
