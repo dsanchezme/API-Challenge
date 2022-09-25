@@ -20,7 +20,7 @@ public class Movies{
 
     private final Logger logger = LogManager.getLogger("lists");
 
-    MoviesController moviesController = new MoviesController();
+    private final MoviesController moviesController = new MoviesController();
     private String mediaID;
 
     @Given("I have a movie ID")

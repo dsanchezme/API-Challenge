@@ -4,7 +4,7 @@ Feature: Movies
     Given I want to get the latest movie
     When I get the most newly created movie
     Then I get status code <200>
-    And the movie has "ID"
+    And the movie has "id"
     And the movie has "title"
     And the movie has "overview"
 

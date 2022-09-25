@@ -26,8 +26,8 @@ public class Lists {
 
     private final Logger logger = LogManager.getLogger("lists");
 
-    ListsController listsController = new ListsController();
-    MoviesController moviesController = new MoviesController();
+    private final ListsController listsController = new ListsController();
+    private final MoviesController moviesController = new MoviesController();
 
     private String listID;
     private String mediaID;

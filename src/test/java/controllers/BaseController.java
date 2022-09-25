@@ -10,6 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeSuite;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseController {
 
     private final SystemVariables systemVariables = new SystemVariables();
@@ -57,7 +60,7 @@ public class BaseController {
             value = response.jsonPath().get(key);
         }catch (Exception e){
             logger.warn("Unable to get " + key + " from response");
-            logger.warn(e);
+            logger.error(e);
         }
         return String.valueOf(value);
     }
