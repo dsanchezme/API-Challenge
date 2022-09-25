@@ -55,8 +55,8 @@ public class Lists {
         logger.debug(context.getResponse().asString());
     }
 
-    @Then("the ID number in the response is the same as the one requested")
-    public void theIDNumberInTheResponseIsTheSameAsTheOneRequested() {
+    @Then("the list ID in the response is the same as the one requested")
+    public void theListIDInTheResponseIsTheSameAsTheOneRequested() {
         String responseListID = BaseController.getValueFromResponse(context.getResponse(), "id");
         Assert.assertNotNull(responseListID);
         Assert.assertEquals(responseListID, this.listID);
