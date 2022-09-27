@@ -1,6 +1,5 @@
 package steps;
 
-import controllers.AuthenticationController;
 import controllers.BaseController;
 import controllers.ListsController;
 import controllers.MoviesController;
@@ -9,10 +8,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.Assert;
+import org.junit.Assert;
 import utils.BodyFactory;
 import utils.ScenarioContext;
 

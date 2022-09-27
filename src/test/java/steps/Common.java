@@ -3,7 +3,7 @@ package steps;
 import controllers.AuthenticationController;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.testng.Assert;
+import org.junit.Assert;
 import utils.ScenarioContext;
 
 public class Common {

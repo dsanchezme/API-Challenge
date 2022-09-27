@@ -8,10 +8,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.BeforeSuite;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BaseController {
 
@@ -19,12 +15,6 @@ public class BaseController {
     private static final Logger logger = LogManager.getLogger("base");
 
     private final String baseURL = "https://api.themoviedb.org/3";
-
-    @BeforeSuite
-    public void setup(){
-        RestAssured.baseURI = "https://api.themoviedb.org/3";
-        logger.info("Setting up baseURI");
-    }
     
     protected RequestSpecification requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
