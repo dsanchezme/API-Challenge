@@ -23,7 +23,7 @@ public class ListsController extends BaseController{
                         "\"description\": \"" + "My list description has a random float number :) " + random.nextFloat()  + "\"," +
                         "\"language\": \"en\" }";
         Response response = createMovieList(sessionID, body);
-        logger.info("Response: "+response.asString());
+        logger.debug("Create movie list response: " + response.asString());
         return getValueFromResponse(response, "list_id");
     }
 

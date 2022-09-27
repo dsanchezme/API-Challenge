@@ -1,15 +1,13 @@
 package controllers;
 
-import com.google.gson.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.restassured.response.Response;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
 public class PeopleController extends BaseController{
-
-    private final Logger logger = LogManager.getLogger("people");
 
     public Response getPopularPeopleResponse(){
         String endpoint = "/person/popular";

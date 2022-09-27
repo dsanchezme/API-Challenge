@@ -19,7 +19,7 @@ public class Movies{
         this.context = context;
     }
 
-    private final Logger logger = LogManager.getLogger("lists");
+    private final Logger logger = LogManager.getLogger("movies");
 
     private final MoviesController moviesController = new MoviesController();
     private String mediaID;
@@ -33,7 +33,6 @@ public class Movies{
     @When("I get the details of the movie")
     public void iGetTheDetailsOfTheMovie() {
         context.setResponse(moviesController.getMovieDetails(this.mediaID));
-        logger.debug(context.getResponse().asString());
     }
 
     @Then("the movie ID in the response is the same as the one requested")
@@ -57,7 +56,6 @@ public class Movies{
     @When("I rate a movie with a value of {float}")
     public void iRateAMovie(float rateValue) {
         context.setResponse(moviesController.rateMovie(context.getSessionID(), this.mediaID, rateValue));
-        logger.debug(context.getResponse().asString());
     }
 
     @Given("I want to get the latest movie")

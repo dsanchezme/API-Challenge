@@ -28,7 +28,7 @@ public class Authentication{
 
     @When("I create the request token")
     public void iCreateTheRequestToken() {
-        logger.debug("Getting response...");
+        logger.debug("Getting request token response...");
         context.setResponse(authenticationController.createRequestToken());
     }
 
@@ -50,7 +50,6 @@ public class Authentication{
 
     @When("I create a session with Login")
     public void iCreateASessionWithLogin() {
-        logger.debug("Getting response...");
         context.setResponse(authenticationController.createSessionWithLogin(this.requestToken));
     }
 
@@ -61,7 +60,6 @@ public class Authentication{
 
     @When("I create a new session")
     public void iCreateANewSession() {
-        logger.debug("Getting response...");
         context.setResponse(authenticationController.createNewSession(this.requestToken));
     }
 

@@ -2,9 +2,12 @@ package controllers;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MoviesController extends BaseController{
 
+    private final Logger logger = LogManager.getLogger("movies");
     public Response getLatestMovie(){
         String endpoint = "/movie/latest";
         return makeGetRequest(endpoint);
@@ -12,6 +15,7 @@ public class MoviesController extends BaseController{
 
     public String getMovieID(){
         Response response = getLatestMovie();
+        logger.debug("Get latest movie response: " + response.asString());
         return getValueFromResponse(response, "id");
     }
 

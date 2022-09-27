@@ -23,6 +23,7 @@ public class BaseController {
 
     protected Response makeGetRequest(String endpoint){
         endpoint = baseURL + endpoint;
+        logger.debug("Get request to " + endpoint);
         return RestAssured
                 .given().spec(requestSpecification).body("")
                 .when().get(endpoint)
@@ -31,6 +32,7 @@ public class BaseController {
 
     protected Response makePostRequest(String endpoint, RequestSpecification specification){
         endpoint = baseURL + endpoint;
+        logger.debug("Post request to " + endpoint);
         return RestAssured
                 .given().spec(specification)
                 .when().post(endpoint)
@@ -38,6 +40,7 @@ public class BaseController {
     }
     protected Response makeDeleteRequest(String endpoint, RequestSpecification specification){
         endpoint = baseURL + endpoint;
+        logger.debug("Delete request to " + endpoint);
         return RestAssured
                 .given().spec(specification)
                 .when().delete(endpoint)

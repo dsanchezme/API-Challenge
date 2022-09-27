@@ -48,7 +48,6 @@ public class People {
     @When("I get the details of that person")
     public void iGetTheDetailsOfThatPerson() {
         context.setResponse(peopleController.getPersonDetails(this.personID));
-        logger.debug(context.getResponse().asString());
     }
 
     @And("the person has {string}")

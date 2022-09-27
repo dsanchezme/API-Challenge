@@ -26,6 +26,6 @@ public class Common {
 
     @Then("I get successfully the response")
     public void iGetSuccessfullyTheResponse() {
-        Assert.assertEquals(context.getResponse().jsonPath().get("success"), true);
+        Assert.assertEquals(true, context.getResponse().jsonPath().get("success"));
     }
 }

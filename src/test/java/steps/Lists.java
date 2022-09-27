@@ -20,7 +20,7 @@ import java.util.Random;
 
 public class Lists {
 
-    private ScenarioContext context;
+    private final ScenarioContext context;
 
     public Lists(ScenarioContext context){
         this.context = context;
@@ -58,7 +58,6 @@ public class Lists {
     @When("I get the details of the list")
     public void iGetTheDetailsOfTheList() {
         context.setResponse(listsController.getListDetails(this.listID));
-        logger.debug(context.getResponse().asString());
     }
 
     @Then("the list ID in the response is the same as the one requested")
@@ -82,7 +81,6 @@ public class Lists {
     @When("I clear the list")
     public void iClearTheList() {
         context.setResponse(listsController.clearList(context.getSessionID(), this.listID));
-        logger.debug(context.getResponse().asString());
     }
 
     @And("I have the ID of a list with at least one item")

@@ -18,6 +18,7 @@ public class AuthenticationController extends BaseController{
 
     public String getRequestToken(){
         Response response = createRequestToken();
+        logger.debug("Request token response: " + response.asString());
         return getValueFromResponse(response, "request_token");
     }
 
@@ -40,6 +41,7 @@ public class AuthenticationController extends BaseController{
 
     public String getSessionID(){
         Response response = createNewSession(getRequestToken());
+        logger.debug("Create new session response: " + response.asString());
         return getValueFromResponse(response, "session_id");
     }
 
